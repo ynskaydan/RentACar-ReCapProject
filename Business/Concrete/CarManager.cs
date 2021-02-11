@@ -21,14 +21,30 @@ namespace Business.Concrete
             _carDal.Add(car);
         }
 
-        public void Delete(Car car)
-        {
-            throw new NotImplementedException();
-        }
-
+      
         public List<Car> GetAll()
         {
             return _carDal.GetAll();
+        }
+
+        public List<Brand> GetAllBrands()
+        {
+            return _carDal.GetAllBrands();
+        }
+
+        public List<Color> GetAllColors()
+        {
+            return _carDal.GetAllColors();
+        }
+
+        public IEnumerable<CarDto> GetAllDetails()
+        {
+            return _carDal.GetAllDetails();
+        }
+
+        public List<Car> GetByBrandId(int brandId)
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(Car car)
