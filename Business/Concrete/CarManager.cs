@@ -3,6 +3,8 @@ using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Business.Concrete
@@ -13,43 +15,46 @@ namespace Business.Concrete
 
         public CarManager(ICarDal carDal)
         {
+         
             _carDal = carDal;
         }
 
         public void Add(Car car)
         {
-            _carDal.Add(car);
+            if (_carDal.Get(c=> c.DailyPrice>0) != null)
+            {
+                _carDal.Add(car);
+            }
+            else
+            {
+                Console.WriteLine("You cannot add car which is free");
+            }
+
         }
 
-      
+        public void Delete(Car entity)
+        {
+            _carDal.Delete(entity);
+        }
+
         public List<Car> GetAll()
         {
             return _carDal.GetAll();
         }
 
-        public List<Brand> GetAllBrands()
+        public List<Car> GetCarsByBrandId(int brandid)
         {
-            return _carDal.GetAllBrands();
+            return _carDal.GetAll().Where(c => c.BrandId == brandid).ToList();
         }
 
-        public List<Color> GetAllColors()
+        public List<Car> GetCarsByColorId(int colorid)
         {
-            return _carDal.GetAllColors();
-        }
-
-        public IEnumerable<CarDto> GetAllDetails()
-        {
-            return _carDal.GetAllDetails();
-        }
-
-        public List<Car> GetByBrandId(int brandId)
-        {
-            throw new NotImplementedException();
+            return _carDal.GetAll().Where(c => c.ColorId == colorid).ToList();
         }
 
         public void Update(Car car)
         {
-            throw new NotImplementedException();
+            _carDal.Update(car);
         }
     }
 }

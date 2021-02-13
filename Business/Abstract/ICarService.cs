@@ -1,20 +1,16 @@
 ﻿using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Business.Abstract
 {
-    public interface ICarService
+    public interface ICarService : IEntityService<Car>
     {
-        List<Car> GetAll();
-        List<Color> GetAllColors();
-        List<Brand> GetAllBrands();
-        IEnumerable<CarDto> GetAllDetails();
-        List<Car> GetByBrandId(int brandId);
-        void Add(Car car);
 
-        void Update(Car car);
+        List<Car> GetCarsByBrandId(int brandid);
+        List<Car> GetCarsByColorId(int colorid);
 
 
     }

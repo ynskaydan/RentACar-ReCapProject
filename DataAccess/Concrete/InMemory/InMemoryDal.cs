@@ -3,6 +3,7 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace DataAccess.Concrete
@@ -72,19 +73,16 @@ namespace DataAccess.Concrete
             _cars.Remove(carToDelete);
         }
 
-        public List<Car> GetAll()
+        public Car Get(Expression<Func<Car, bool>> filter)
         {
-            return _cars;
+            throw new NotImplementedException();
         }
 
-        public List<Brand> GetAllBrands()
-        {
-            return _brands;
-        }
+   
 
-        public List<Color> GetAllColors()
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
         {
-            return _colors;
+            throw new NotImplementedException();
         }
 
         public IEnumerable<CarDto> GetAllDetails()
@@ -96,12 +94,7 @@ namespace DataAccess.Concrete
                              select new CarDto { CarId = car.CarId, BrandId = car.BrandId, BrandName = b.BrandName, ColorId = car.ColorId, ColorName = c.ColorName, DailyPrice = car.DailyPrice, Description = car.Description, ModelYear = car.ModelYear };
             return cardetails;
         }
-
-        public List<Car> GetByBrandId(int brandId)
-        {
-            return (List<Car>)_cars.Where(c => c.BrandId == brandId);
-        }
-
+    
         public void Update(Car car)
         {
             Car carToUpdate = _cars.SingleOrDefault(c => c.CarId == car.CarId);
@@ -109,6 +102,11 @@ namespace DataAccess.Concrete
             car.ColorId = carToUpdate.ColorId;
             car.DailyPrice = carToUpdate.DailyPrice;
             car.Description = carToUpdate.Description;
+        }
+
+        IEnumerable<Car> IEntityRepository<Car>.GetAllDetails()
+        {
+            throw new NotImplementedException();
         }
     }
 
