@@ -19,12 +19,15 @@ namespace ConsoleUI
            
             //List<Color> colors = carManager.GetAllColors();
 
-            foreach (var carxcolor in carManager.GetCarsByBrandId(5))
+            foreach (var carxbrand in carManager.GetCarsByBrandId(5))
             {
-                Console.WriteLine(carxcolor.Description + " Filtered by Brand 5 " + carxcolor.BrandId );
+                Console.WriteLine( carxbrand.CarId + " " + carxbrand.Description + " Filtered by Brand  " + carxbrand.BrandId );
             }
 
-            
+            foreach(var carxcolor in carManager.GetCarsByColorId(3))
+            {
+                Console.WriteLine(carxcolor.CarId + " " + carxcolor.Description + " Filtered by Color  "+ carxcolor.ColorId);
+            }
 
             Console.WriteLine("----------------------");
 
