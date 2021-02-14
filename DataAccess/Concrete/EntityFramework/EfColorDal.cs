@@ -60,9 +60,7 @@ namespace DataAccess.Concrete.EntityFramework
         }
  
 
-        IEnumerable<Color> IEntityRepository<Color>.GetAllDetails()
-        {
-            throw new NotImplementedException();
-        }
+      
+        
     }
 }

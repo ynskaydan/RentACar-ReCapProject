@@ -49,11 +49,6 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public IEnumerable<Car> GetAllDetails()
-        {
-            throw new NotImplementedException();
-        }
-
         public void Update(Car entity)
         {
             using (RentCarContext context = new RentCarContext())

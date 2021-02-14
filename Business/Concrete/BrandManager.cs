@@ -36,6 +36,12 @@ namespace Business.Concrete
             _brandDal.Delete(entity);
         }
 
+
+        public Brand Get(Expression<Func<Car, bool>> filter)
+        {
+            return _brandDal.Get(filter);
+        }
+
         public List<Brand> GetAll()
         {
             return _brandDal.GetAll();

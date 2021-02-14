@@ -27,21 +27,15 @@ namespace Business.Concrete
             _colorDal.Delete(entity);
         }
 
-        public Color Get(Expression<Func<Color, bool>> filter)
-        {
-            return _colorDal.Get(filter);
-        }
 
-    
-
-        public List<Color> GetAll(Expression<Func<Color, bool>> filter=null)
+        public Color Get(Expression<Func<Car, bool>> filter)
         {
-            return _colorDal.GetAll();
+            return _colorDal.Get();
         }
 
         public List<Color> GetAll()
         {
-            throw new NotImplementedException();
+            return _colorDal.GetAll();
         }
 
         public void Update(Color entity)

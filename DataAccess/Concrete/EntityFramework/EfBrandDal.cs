@@ -61,9 +61,6 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        IEnumerable<Brand> IEntityRepository<Brand>.GetAllDetails()
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 }
