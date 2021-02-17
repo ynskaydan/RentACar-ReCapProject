@@ -58,7 +58,11 @@ namespace DataAccess.Concrete
                 
         }
 
-    
+        public List<CarDto> GetCarDtos()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(Car car)
         {
             Car carToUpdate = _cars.SingleOrDefault(c => c.CarId == car.CarId);
@@ -66,22 +70,8 @@ namespace DataAccess.Concrete
             car.ColorId = carToUpdate.ColorId;
             car.DailyPrice = carToUpdate.DailyPrice;
             car.Description = carToUpdate.Description;
-        }
-
-       
-
-
-            //var cardetails = from car in _cars
-            //                 join b in _brands on car.BrandId equals b.BrandId
-            //                 join c in _colors on car.ColorId equals c.ColorId
-            //                 select new CarDto { CarId = car.CarId, BrandId = car.BrandId, BrandName = b.BrandName, ColorId = car.ColorId, ColorName = c.ColorName, DailyPrice = car.DailyPrice, Description = car.Description, ModelYear = car.ModelYear };
-            //return cardetails;
-       
+        }                  
     }
-
-       
-        
-    
-    }
+}
 
 

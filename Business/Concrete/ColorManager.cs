@@ -28,11 +28,7 @@ namespace Business.Concrete
         }
 
 
-        public Color Get(Expression<Func<Car, bool>> filter)
-        {
-            return _colorDal.Get();
-        }
-
+     
         public List<Color> GetAll()
         {
             return _colorDal.GetAll();

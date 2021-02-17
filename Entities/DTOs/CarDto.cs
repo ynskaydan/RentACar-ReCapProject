@@ -1,11 +1,11 @@
-﻿using Entities.Abstract;
+﻿using Core;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Entities.Concrete
 {
-    public class CarDto: IEntity
+    public class CarDto: IDto
     {
         public int CarId { get; set; }
         public int BrandId { get; set; }

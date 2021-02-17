@@ -37,22 +37,11 @@ namespace ConsoleUI
 
             Console.WriteLine("----------------------");
        
-            var results = from c in carManager.GetAll().ToList()
-                          join cx in colorManager.GetAll().ToList() on c.ColorId equals cx.ColorId
-                          join b in brandManager.GetAll().ToList() on  c.BrandId equals b.BrandId
-                          select new CarDto { CarId = c.CarId, 
-                              BrandId = c.BrandId, 
-                              BrandName = b.BrandName, 
-                              ColorId = c.ColorId, 
-                              ColorName = cx.ColorName, 
-                              DailyPrice = c.DailyPrice, 
-                              Description = c.Description, 
-                              ModelYear = c.ModelYear };
-
+            
 
             Console.WriteLine("Our Cars listed below: ");
 
-            foreach (var car in results)
+            foreach (var car in carManager.GetCarDtos())
             {
                 Console.WriteLine("----" + car.CarId + "----");
                 Console.WriteLine("Brand Name: " + car.BrandName);

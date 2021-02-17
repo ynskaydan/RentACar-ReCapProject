@@ -37,11 +37,6 @@ namespace Business.Concrete
         }
 
 
-        public Brand Get(Expression<Func<Car, bool>> filter)
-        {
-            return _brandDal.Get(filter);
-        }
-
         public List<Brand> GetAll()
         {
             return _brandDal.GetAll();

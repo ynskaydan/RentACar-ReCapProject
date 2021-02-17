@@ -9,7 +9,6 @@ namespace Business.Abstract
     public interface IEntityService<T>
     {
         List<T> GetAll();
-        T Get(Expression<Func<Car, bool>> filter);
 
       //  IEnumerable<CarDto> GetAllDetails();
         void Add(T entity);
