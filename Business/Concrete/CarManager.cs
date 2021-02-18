@@ -74,9 +74,6 @@ namespace Business.Concrete
             _carDal.Update(car);
         }
 
-        public Car GetCarByCarId(int carid)
-        {
-            return _carDal.Get(c => c.CarId == carid);
-        }
+
     }
 }
