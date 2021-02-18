@@ -20,15 +20,30 @@ namespace Business.Concrete
 
         public void Add(Brand entity)
         {
-            if (_brandDal.Get(c=> c.BrandName.Length>2) != null)
+            if (_brandDal.Get(c => c.BrandId == entity.BrandId) == null)
             {
-                _brandDal.Add(entity);
+                if (_brandDal.Get(c => c.BrandName == entity.BrandName) == null)
+                {
+                    if (_brandDal.Get(c => c.BrandName.Length > 2) != null)
+                    {
+                        _brandDal.Add(entity);
+                    }
+                    else
+                    {
+                        Console.WriteLine("BrandName must be include at least 2 character ");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("You cannot add this Brand. Please write a different BrandName ");
+                }
+               
             }
             else
             {
-                Console.WriteLine("BrandName must be include at least 2 character ");
+                Console.WriteLine("You cannot add this Brand. Please write a different BrandID");
             }
-            
+
         }
 
         public void Delete(Brand entity)

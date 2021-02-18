@@ -21,14 +21,22 @@ namespace Business.Concrete
 
         public void Add(Car car)
         {
-            if (_carDal.Get(c=> c.DailyPrice>0) != null)
+            if (_carDal.Get(c => c.CarId == car.CarId) == null) 
             {
-                _carDal.Add(car);
+                if (_carDal.Get(c => c.DailyPrice > 0) != null)
+                {
+                    _carDal.Add(car);
+                }
+                else
+                {
+                    Console.WriteLine("You cannot add car which is free");
+                }
             }
             else
             {
-                Console.WriteLine("You cannot add car which is free");
+                Console.WriteLine("You cannot add this car. Please write a different CarID");
             }
+
 
         }
 
@@ -42,6 +50,9 @@ namespace Business.Concrete
         {
             return _carDal.GetAll();
         }
+
+        
+        //
 
         public List<CarDto> GetCarDtos()
         {
@@ -61,6 +72,11 @@ namespace Business.Concrete
         public void Update(Car car)
         {
             _carDal.Update(car);
+        }
+
+        public Car GetCarByCarId(int carid)
+        {
+            return _carDal.Get(c => c.CarId == carid);
         }
     }
 }

@@ -18,8 +18,22 @@ namespace Business.Concrete
         }
         public void Add(Color entity)
         {
-
-            _colorDal.Add(entity);
+            if (_colorDal.Get(c => c.ColorId == entity.ColorId) == null)
+            {
+                if (_colorDal.Get(c => c.ColorName == entity.ColorName) == null)
+                {
+                    _colorDal.Add(entity);
+                }
+                else
+                {
+                    Console.WriteLine("You cannot add this Color. Please write a different ColorName");
+                }
+            }
+            else
+            {
+                Console.WriteLine("You cannot add this Color. Please write a different ColorID");
+            }
+        
         }
 
         public void Delete(Color entity)
