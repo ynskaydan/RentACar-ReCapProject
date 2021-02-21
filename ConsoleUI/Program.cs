@@ -22,9 +22,10 @@ namespace ConsoleUI
             CarManager carManager = new CarManager(new EfCarDal());
             ColorManager colorManager = new ColorManager(new EfColorDal());
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            //brandManager.Add(new Brand { BrandId = 11, BrandName = "Anadol" });
-            //colorManager.Add(new Color { ColorId = 9, ColorName = "Turquaz" });
-            //carManager.Add(new Car { BrandId = 11, ColorId = 9, CarId = 22, ModelYear = 1994, DailyPrice = 50,Description="Nostalgic" });
+            TypeManager typeManager = new TypeManager(new EfTypeDal());
+            brandManager.Add(new Brand { BrandId = 11, BrandName = "Anadol" });
+            colorManager.Add(new Color { ColorId = 9, ColorName = "Turquaz" });
+            carManager.Add(new Car { BrandId = 11, ColorId = 9, CarId = 22, ModelYear = 1994, DailyPrice = 50,Description="Nostalgic" });
             
 
             
@@ -47,7 +48,7 @@ namespace ConsoleUI
 
             Console.WriteLine("Our Cars listed below: ");
 
-            foreach (var car in carManager.GetCarDtos())
+            foreach (var car in carManager.GetCarDtos().Data)
             {
                 Console.WriteLine("----" + car.CarId + "----");
                 Console.WriteLine("Brand Name: " + car.BrandName);

@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Utilities.Results.Abstract;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -8,11 +9,11 @@ namespace Business.Abstract
 {
     public interface IEntityService<T>
     {
-        List<T> GetAll();
+        IDataResult<List<T>> GetAll();
 
       //  IEnumerable<CarDto> GetAllDetails();
-        void Add(T entity);
-        void Update(T entity);
-        void Delete(T entity);
+        IResult Add(T entity);
+        IResult Update(T entity);
+        IResult Delete(T entity);
     }
 }

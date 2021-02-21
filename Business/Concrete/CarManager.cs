@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results.Abstract;
+using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -18,62 +20,58 @@ namespace Business.Concrete
          
             _carDal = carDal;
         }
-
-        public void Add(Car car)
+  
+        public IDataResult<List<CarDto>> GetCarDtos()
         {
-            if (_carDal.Get(c => c.CarId == car.CarId) == null) 
+            return new SuccessDataResult<List<CarDto>>(_carDal.GetCarDtos(),"Cars listed with their details");
+        }
+
+        public IDataResult<List<Car>> GetCarsByBrandId(int brandid)
+        {
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll().Where(c => c.BrandId == brandid).ToList(),"Cars listed by brand id "+brandid);
+        }
+
+        public IDataResult<List<Car>> GetCarsByColorId(int colorid)
+        {
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll().Where(c => c.ColorId == colorid).ToList(),"Cars listed by color id "+colorid);
+        }
+
+        public IDataResult<List<Car>> GetAll()
+        {
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(), "All Cars Listed");
+        }
+
+        public IResult Add(Car entity)
+        {
+            if (_carDal.Get(c => c.CarId == entity.CarId) == null)
             {
                 if (_carDal.Get(c => c.DailyPrice > 0) != null)
                 {
-                    _carDal.Add(car);
+                    
+                    _carDal.Add(entity);
+                    return new SuccessResult("This car added.");
                 }
                 else
                 {
-                    Console.WriteLine("You cannot add car which is free");
+                    return new ErrorResult("This car can't be add");
                 }
             }
             else
             {
-                Console.WriteLine("You cannot add this car. Please write a different CarID");
+                return new ErrorResult("This car can't be add");
             }
-
-
         }
 
-        public void Delete(Car entity)
+        public IResult Update(Car entity)
+        {
+            _carDal.Update(entity);
+            return new SuccessResult("Car Updated!");
+        }
+
+        public IResult Delete(Car entity)
         {
             _carDal.Delete(entity);
+            return new SuccessResult("Car deleted!");
         }
-
-
-        public List<Car> GetAll()
-        {
-            return _carDal.GetAll();
-        }
-
-        
-        //
-
-        public List<CarDto> GetCarDtos()
-        {
-           return _carDal.GetCarDtos();
-        }
-
-        public List<Car> GetCarsByBrandId(int brandid)
-        {
-            return _carDal.GetAll().Where(c => c.BrandId == brandid).ToList();
-        }
-
-        public List<Car> GetCarsByColorId(int colorid)
-        {
-            return _carDal.GetAll().Where(c => c.ColorId == colorid).ToList();
-        }
-
-        public void Update(Car car)
-        {
-            _carDal.Update(car);
-        }
-
-
     }
 }

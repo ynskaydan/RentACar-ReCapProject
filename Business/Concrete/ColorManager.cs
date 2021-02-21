@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results.Abstract;
+using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -16,41 +18,49 @@ namespace Business.Concrete
         {
             _colorDal = colorDal;
         }
-        public void Add(Color entity)
+     
+
+       
+
+
+
+        public IResult Add(Color entity)
         {
             if (_colorDal.Get(c => c.ColorId == entity.ColorId) == null)
             {
                 if (_colorDal.Get(c => c.ColorName == entity.ColorName) == null)
                 {
                     _colorDal.Add(entity);
+                    return new SuccessResult("Color is successfully added");
+
                 }
                 else
                 {
-                    Console.WriteLine("You cannot add this Color. Please write a different ColorName");
+                    return new ErrorResult("You cannot add this Color. Please write a different ColorName");
                 }
             }
             else
             {
-                Console.WriteLine("You cannot add this Color. Please write a different ColorID");
+                return new ErrorResult("You cannot add this Color. Please write a different ColorID");
             }
-        
         }
 
-        public void Delete(Color entity)
+        public IResult Delete(Color entity)
         {
             _colorDal.Delete(entity);
+            return new SuccessResult("Color is completely removed");
+
         }
 
-
-     
-        public List<Color> GetAll()
+        public IDataResult<List<Color>> GetAll()
         {
-            return _colorDal.GetAll();
+            return new SuccessDataResult<List<Color>>(_colorDal.GetAll(),"All colors got)");
         }
 
-        public void Update(Color entity)
+        public IResult Update(Color entity)
         {
             _colorDal.Update(entity);
+            return new SuccessResult("This color is updated");
         }
     }
 }

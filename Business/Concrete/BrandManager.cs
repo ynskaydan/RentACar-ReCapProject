@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results.Abstract;
+using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
@@ -18,7 +20,8 @@ namespace Business.Concrete
             _brandDal = brandDal;
         }
 
-        public void Add(Brand entity)
+
+        public IResult Add(Brand entity)
         {
             if (_brandDal.Get(c => c.BrandId == entity.BrandId) == null)
             {
@@ -27,39 +30,40 @@ namespace Business.Concrete
                     if (_brandDal.Get(c => c.BrandName.Length > 2) != null)
                     {
                         _brandDal.Add(entity);
+                        return new SuccessResult("Brand is succesfully added");
                     }
                     else
                     {
-                        Console.WriteLine("BrandName must be include at least 2 character ");
+                        return new ErrorResult("BrandName must be include at least 2 character");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("You cannot add this Brand. Please write a different BrandName ");
+                    return new ErrorResult("You cannot add this Brand. Please write a different BrandName");
                 }
-               
+
             }
             else
             {
-                Console.WriteLine("You cannot add this Brand. Please write a different BrandID");
+                return new ErrorResult("You cannot add this Brand. Please write a different BrandID");
             }
-
         }
 
-        public void Delete(Brand entity)
+        public IResult Delete(Brand entity)
         {
             _brandDal.Delete(entity);
+            return new SuccessResult("This brand completely removed.");
         }
 
-
-        public List<Brand> GetAll()
+        public IDataResult<List<Brand>> GetAll()
         {
-            return _brandDal.GetAll();
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(), "All brands got");
         }
 
-        public void Update(Brand entity)
+        public IResult Update(Brand entity)
         {
             _brandDal.Update(entity);
+            return new SuccessResult("This brand updated.");
         }
     }
 }
