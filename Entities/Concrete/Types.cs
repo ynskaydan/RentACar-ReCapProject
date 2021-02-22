@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Entities.Concrete
 {
-    public class TypeOfVehicle:IEntity
+    public class Types:IEntity
     {
-        public int TypeId { get; set; }
-        public string TypeName { get; set; }
+        public int TypesId { get; set; }
+        public string TypesName { get; set; }
     }
 }

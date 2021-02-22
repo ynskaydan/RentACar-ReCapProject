@@ -7,29 +7,39 @@ using System.Text;
 
 namespace DataAccess.Concrete.InMemory
 {
-    public class InMemoryTypeDal : ITypeDal
+    public class InMemoryTypeDal : ITypesDal
     {
-        public void Add(TypeOfVehicle entity)
+        public void Add(Types entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(TypeOfVehicle entity)
+        public void Delete(Types entity)
         {
             throw new NotImplementedException();
         }
 
-        public TypeOfVehicle Get(Expression<Func<TypeOfVehicle, bool>> filter)
+        public Types Get(Expression<Func<Types, bool>> filter)
         {
             throw new NotImplementedException();
         }
 
-        public List<TypeOfVehicle> GetAll(Expression<Func<TypeOfVehicle, bool>> filter = null)
+        public List<Type> GetAll(Expression<Func<Type, bool>> filter = null)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(TypeOfVehicle entity)
+        public List<Types> GetAll(Expression<Func<Types, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Type entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Types entity)
         {
             throw new NotImplementedException();
         }

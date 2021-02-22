@@ -22,14 +22,29 @@ namespace ConsoleUI
             CarManager carManager = new CarManager(new EfCarDal());
             ColorManager colorManager = new ColorManager(new EfColorDal());
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            TypeManager typeManager = new TypeManager(new EfTypeDal());
+            TypesManager typesManager = new TypesManager(new EfTypesDal());
+            UserManager userManager = new UserManager(new EfUserDal());
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
             brandManager.Add(new Brand { BrandId = 11, BrandName = "Anadol" });
             colorManager.Add(new Color { ColorId = 9, ColorName = "Turquaz" });
             carManager.Add(new Car { BrandId = 11, ColorId = 9, CarId = 22, ModelYear = 1994, DailyPrice = 50,Description="Nostalgic" });
-            
+            Console.WriteLine(rentalManager.Add(new Rental()
+            {
+                CarId = 4,
+                RentalId = 4,
+                CustomerId = 5,
 
-            
-        
+            }).Success);
+
+
+
+
+            foreach (var rent in rentalManager.GetAll().Data)
+            {
+                Console.WriteLine("Rent Id: " + rent.RentalId);
+                Console.WriteLine("car id "+ rent.CarId);
+            }
 
             //Console.WriteLine("Mercedes-Benz Cars: ");
             //foreach (var carxbrand in carManager.GetCarsByBrandId(2))
@@ -42,16 +57,32 @@ namespace ConsoleUI
             //    Console.WriteLine(carxcolor.CarId + " " + carxcolor.Description + " Filtered by Color  "+ carxcolor.ColorId);
             //}
 
+
+            Console.WriteLine(userManager.GetAllDetails().Message);
+            var resultusers = userManager.GetAllDetails().Data;
+            if (userManager.GetAllDetails().Success == true)
+            {
+
+                foreach (var user in resultusers)
+                {
+                    Console.WriteLine("--- " + user.UserId + "---");
+                    Console.WriteLine("User Name: " + user.Name);
+                    Console.WriteLine("User SurName: " + user.Surname);
+                    Console.WriteLine("User Email: " + user.Email);
+                    Console.WriteLine("User's CompanyName : " + user.CompanyName);
+                }
+            }
             Console.WriteLine("----------------------");
        
             
 
-            Console.WriteLine("Our Cars listed below: ");
+            Console.WriteLine(carManager.GetCarDtos().Message);
 
             foreach (var car in carManager.GetCarDtos().Data)
             {
                 Console.WriteLine("----" + car.CarId + "----");
                 Console.WriteLine("Brand Name: " + car.BrandName);
+                Console.WriteLine("Type: " + car.TypeName);
                 Console.WriteLine("Color: " + car.ColorName);
                 Console.WriteLine("Model Year: " + car.ModelYear);
                 Console.WriteLine("Description: " + car.Description);
