@@ -24,7 +24,7 @@ namespace Business.Concrete
             {
                 if (GetCarAvaible(entity).Success == false )
                 {
-                    Console.WriteLine(GetCarAvaible(entity).Message); 
+                    return new ErrorResult(GetCarAvaible(entity).Message); 
                 }
                 
             }
