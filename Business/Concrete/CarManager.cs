@@ -45,7 +45,7 @@ namespace Business.Concrete
         {
             if (_carDal.Get(c => c.CarId == entity.CarId) == null)
             {
-                if (_carDal.Get(c => c.DailyPrice > 0) != null)
+                if (_carDal.GetAll(c => c.DailyPrice > 0) != null)
                 {
                     
                     _carDal.Add(entity);
