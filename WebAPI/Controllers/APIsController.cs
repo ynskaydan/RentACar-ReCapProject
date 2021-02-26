@@ -1,5 +1,5 @@
 ﻿using Business.Abstract;
-using Entities.Concrete;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,44 +10,39 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RentalsController : Controller
+    public class APIsController<T> : ControllerBase
     {
-       
-        IRentalService _rentalService;
+        IEntityService<T> _entityService;
 
-        public RentalsController(IRentalService rentalService)
+        public APIsController(IEntityService<T> entityService)
         {
-            _rentalService = rentalService;
+            _entityService = entityService;
         }
 
-       
-
-        [HttpGet("getallrental")]
-        public IActionResult GetRentals()
+        [HttpGet("getall")]
+        public IActionResult GetAll()
         {
-            var result = _rentalService.GetAll();
+            var result = _entityService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-        [HttpPost("add")]
-
-        public IActionResult Add(Rental rental)
+        [HttpGet("add")]
+        public IActionResult Add(T entity)
         {
-            var result = _rentalService.Add(rental);
+            var result = _entityService.Add(entity);
             if (result.Success)
             {
                 return Ok(result);
-
             }
             return BadRequest(result);
         }
         [HttpPut("update")]
-        public IActionResult Update(Rental rental)
+        public IActionResult Update(T entity)
         {
-            var result = _rentalService.Update(rental);
+            var result = _entityService.Update(entity);
             if (result.Success)
             {
                 return Ok(result);
@@ -56,10 +51,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpDelete("delete")]
-        public IActionResult Delete(int codid)
+        public IActionResult Delete(int id)
         {
-            Rental deletedColor = _rentalService.GetById(codid).Data;
-            var result = _rentalService.Delete(deletedColor);
+            T deletedEntity = _entityService.GetById(id).Data;
+            var result = _entityService.Delete(deletedEntity);
             if (result.Success)
             {
                 return Ok(result);
@@ -67,4 +62,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
     }
+
 }
+
+

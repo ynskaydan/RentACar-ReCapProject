@@ -60,6 +60,11 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(), "All brands got");
         }
 
+        public IDataResult<Brand> GetById(int id)
+        {
+            return new SuccessDataResult<Brand>(_brandDal.Get(b => b.BrandId == id),"Brand got");
+        }
+
         public IResult Update(Brand entity)
         {
             _brandDal.Update(entity);

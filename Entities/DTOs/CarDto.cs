@@ -13,6 +13,6 @@ namespace Entities.Concrete
         public int ModelYear { get; set; }
         public string Description { get; set; }
         public decimal DailyPrice { get; set; }
-        public string TypeName { get; set; }
+        public string TypeOfVehicleName { get; set; }
     }
 }

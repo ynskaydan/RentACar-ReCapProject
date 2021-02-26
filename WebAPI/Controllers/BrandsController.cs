@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,44 +11,40 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RentalsController : Controller
+    public class BrandsController : ControllerBase
     {
-       
-        IRentalService _rentalService;
+        IBrandService _brandService;
 
-        public RentalsController(IRentalService rentalService)
+        public BrandsController(IBrandService brandService)
         {
-            _rentalService = rentalService;
+            _brandService = brandService;
         }
 
-       
-
-        [HttpGet("getallrental")]
-        public IActionResult GetRentals()
+        [HttpGet("getall")]
+        public IActionResult GetAll()
         {
-            var result = _rentalService.GetAll();
+            var result = _brandService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-        [HttpPost("add")]
 
-        public IActionResult Add(Rental rental)
+        [HttpPost("add")]
+        public IActionResult Add(Brand brand)
         {
-            var result = _rentalService.Add(rental);
+            var result = _brandService.Add(brand);
             if (result.Success)
             {
                 return Ok(result);
-
             }
             return BadRequest(result);
         }
         [HttpPut("update")]
-        public IActionResult Update(Rental rental)
+        public IActionResult Update(Brand brand)
         {
-            var result = _rentalService.Update(rental);
+            var result = _brandService.Update(brand);
             if (result.Success)
             {
                 return Ok(result);
@@ -58,8 +55,8 @@ namespace WebAPI.Controllers
         [HttpDelete("delete")]
         public IActionResult Delete(int codid)
         {
-            Rental deletedColor = _rentalService.GetById(codid).Data;
-            var result = _rentalService.Delete(deletedColor);
+            Brand deletedBrand = _brandService.GetById(codid).Data;
+            var result = _brandService.Delete(deletedBrand);
             if (result.Success)
             {
                 return Ok(result);
@@ -67,4 +64,6 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
     }
+
+    
 }

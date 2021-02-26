@@ -10,44 +10,38 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RentalsController : Controller
+    public class TypesOfVehicleController : Controller
     {
-       
-        IRentalService _rentalService;
+        ITypeOfVehicleService _typeOfVehicleService;
 
-        public RentalsController(IRentalService rentalService)
+        public TypesOfVehicleController(ITypeOfVehicleService typeOfVehicleService)
         {
-            _rentalService = rentalService;
+            _typeOfVehicleService = typeOfVehicleService;
         }
-
-       
-
-        [HttpGet("getallrental")]
-        public IActionResult GetRentals()
+        [HttpGet("getall")]
+        public IActionResult GetAll()
         {
-            var result = _rentalService.GetAll();
+            var result = _typeOfVehicleService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-        [HttpPost("add")]
-
-        public IActionResult Add(Rental rental)
+        [HttpGet("add")]
+        public IActionResult Add(TypeOfVehicle typeOfVehicle)
         {
-            var result = _rentalService.Add(rental);
+            var result = _typeOfVehicleService.Add(typeOfVehicle);
             if (result.Success)
             {
                 return Ok(result);
-
             }
             return BadRequest(result);
         }
         [HttpPut("update")]
-        public IActionResult Update(Rental rental)
+        public IActionResult Update(TypeOfVehicle typeOfVehicle)
         {
-            var result = _rentalService.Update(rental);
+            var result = _typeOfVehicleService.Update(typeOfVehicle);
             if (result.Success)
             {
                 return Ok(result);
@@ -58,13 +52,14 @@ namespace WebAPI.Controllers
         [HttpDelete("delete")]
         public IActionResult Delete(int codid)
         {
-            Rental deletedColor = _rentalService.GetById(codid).Data;
-            var result = _rentalService.Delete(deletedColor);
+            TypeOfVehicle deletedTypeOfVehicle = _typeOfVehicleService.GetById(codid).Data;
+            var result = _typeOfVehicleService.Delete(deletedTypeOfVehicle);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
+
     }
 }

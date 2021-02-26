@@ -10,44 +10,39 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RentalsController : Controller
+    public class ColorsController : Controller
     {
-       
-        IRentalService _rentalService;
-
-        public RentalsController(IRentalService rentalService)
+        IColorService _colorService;
+    
+        public ColorsController(IColorService colorService)
         {
-            _rentalService = rentalService;
+            _colorService = colorService;
         }
 
-       
-
-        [HttpGet("getallrental")]
-        public IActionResult GetRentals()
+        [HttpGet("getall")]
+        public IActionResult GetAll()
         {
-            var result = _rentalService.GetAll();
+            var result = _colorService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-        [HttpPost("add")]
-
-        public IActionResult Add(Rental rental)
+        [HttpGet("add")]
+        public IActionResult Add(Color color)
         {
-            var result = _rentalService.Add(rental);
+            var result = _colorService.Add(color);
             if (result.Success)
             {
                 return Ok(result);
-
             }
             return BadRequest(result);
         }
         [HttpPut("update")]
-        public IActionResult Update(Rental rental)
+        public IActionResult Update(Color color)
         {
-            var result = _rentalService.Update(rental);
+            var result = _colorService.Update(color);
             if (result.Success)
             {
                 return Ok(result);
@@ -58,8 +53,8 @@ namespace WebAPI.Controllers
         [HttpDelete("delete")]
         public IActionResult Delete(int codid)
         {
-            Rental deletedColor = _rentalService.GetById(codid).Data;
-            var result = _rentalService.Delete(deletedColor);
+            Color deletedColor = _colorService.GetById(codid).Data;
+            var result = _colorService.Delete(deletedColor);
             if (result.Success)
             {
                 return Ok(result);

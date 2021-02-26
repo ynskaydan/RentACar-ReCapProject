@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DataAccess.Abstract
 {
-    public interface ITypesDal:IEntityRepository<Types>
+    public interface ITypeOfVehicleDal:IEntityRepository<TypeOfVehicle>
     {
 
     }

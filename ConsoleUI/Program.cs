@@ -22,7 +22,7 @@ namespace ConsoleUI
             CarManager carManager = new CarManager(new EfCarDal());
             ColorManager colorManager = new ColorManager(new EfColorDal());
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            TypesManager typesManager = new TypesManager(new EfTypesDal());
+            TypeOfVehicleManager typesManager = new TypeOfVehicleManager(new EfTypeOfVehicleDal());
             UserManager userManager = new UserManager(new EfUserDal());
             CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
@@ -82,7 +82,7 @@ namespace ConsoleUI
             {
                 Console.WriteLine("----" + car.CarId + "----");
                 Console.WriteLine("Brand Name: " + car.BrandName);
-                Console.WriteLine("Type: " + car.TypeName);
+                Console.WriteLine("Type: " + car.TypeOfVehicleName);
                 Console.WriteLine("Color: " + car.ColorName);
                 Console.WriteLine("Model Year: " + car.ModelYear);
                 Console.WriteLine("Description: " + car.Description);
