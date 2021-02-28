@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -20,34 +22,20 @@ namespace Business.Concrete
             _brandDal = brandDal;
         }
 
-
+        [ValidationAspect(typeof(BrandValidator),Priority=1)]
         public IResult Add(Brand entity)
-        {
-            if (_brandDal.Get(c => c.BrandId == entity.BrandId) == null)
-            {
-                if (_brandDal.Get(c => c.BrandName == entity.BrandName) == null)
+        {            
+                if (_brandDal.Get(c => c.BrandName == entity.BrandName) != null)
                 {
-                    if (_brandDal.Get(c => c.BrandName.Length > 2) != null)
-                    {
-                        _brandDal.Add(entity);
-                        return new SuccessResult("Brand is succesfully added");
-                    }
-                    else
-                    {
-                        return new ErrorResult("BrandName must be include at least 2 character");
-                    }
-                }
-                else
-                {
-                    return new ErrorResult("You cannot add this Brand. Please write a different BrandName");
+                     return new ErrorResult("You cannot add this Brand. Please write a different BrandName");
                 }
 
-            }
-            else
-            {
-                return new ErrorResult("You cannot add this Brand. Please write a different BrandID");
-            }
-        }
+                 _brandDal.Add(entity);
+                 return new SuccessResult("Brand is succesfully added");
+               
+          }
+           
+        
 
         public IResult Delete(Brand entity)
         {

@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Aspects.Autofac;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -19,7 +20,7 @@ namespace Business.Concrete
         {
             _userDal = userDal;
         }
-
+      //  [ValidationAspect(typeof(UserValidator),Priority=1)]
         public IResult Add(User user)
         {
             if (_userDal.Get(u=> u.UserId == user.UserId) == null)

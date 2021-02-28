@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -20,35 +22,21 @@ namespace Business.Concrete
         }
 
    
-
+        [ValidationAspect(typeof(TypeOfVehicleValidator),Priority = 1 )]
         public IResult Add(TypeOfVehicle entity)
         {
-            if (_typeDal.Get(c => c.TypeOfVehicleId == entity.TypeOfVehicleId) == null)
-            {
+           
                 if (_typeDal.Get(c => c.TypeOfVehicleName == entity.TypeOfVehicleName) == null)
                 {
-                    if (_typeDal.Get(c => c.TypeOfVehicleName.Length > 2) != null)
-                   {
+                   
                         _typeDal.Add(entity);
                         return new SuccessResult("Type of Vehicle added succesfully");
-                    }
-                    else
-                    { 
-                        return new ErrorResult("TypeName must be include at least 2 character ");
-                    }
-                }
+                }               
                 else
                 {
                     return new ErrorResult("You cannot add this Type. Please write a different TypeName");
                 }
-
-            }
-            else
-            {
-                return new ErrorResult("You cannot add this Type. Please write a different TypeID");
-            }
-        }
-
+            }         
         public IResult Delete(TypeOfVehicle entity)
         {
             _typeDal.Delete(entity);

@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Aspects.Autofac;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -17,7 +18,7 @@ namespace Business.Concrete
         {
             _descriptionDal = descriptionDal;
         }
-
+       // [ValidationAspect(typeof(DescriptionValidator), Priority = 1)]
         public IResult Add(Description entity)
         {
             _descriptionDal.Add(entity);

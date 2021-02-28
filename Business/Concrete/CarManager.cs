@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -41,6 +43,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), "All Cars Listed");
         }
 
+        [ValidationAspect(typeof(CarValidator), Priority =1 )]
         public IResult Add(Car entity)
         {
             if (_carDal.Get(c => c.CarId == entity.CarId) == null)
