@@ -28,7 +28,7 @@ namespace ConsoleUI
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
             brandManager.Add(new Brand { BrandId = 11, BrandName = "Anadol" });
             colorManager.Add(new Color { ColorId = 9, ColorName = "Turquaz" });
-            carManager.Add(new Car { BrandId = 11, ColorId = 9, CarId = 22, ModelYear = 1994, DailyPrice = 50,Description="Nostalgic" });
+            carManager.Add(new Car { BrandId = 11, ColorId = 9, CarId = 22, ModelYear = 1994, DailyPrice = 50,TypeOfVehicleId=5 });
             Console.WriteLine(rentalManager.Add(new Rental()
             {
                 CarId = 4,

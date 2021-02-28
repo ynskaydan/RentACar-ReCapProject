@@ -45,21 +45,10 @@ namespace Business.Concrete
         {
             if (_carDal.Get(c => c.CarId == entity.CarId) == null)
             {
-                if (_carDal.GetAll(c => c.DailyPrice > 0) != null)
-                {
-                    
-                    _carDal.Add(entity);
-                    return new SuccessResult("This car added.");
-                }
-                else
-                {
-                    return new ErrorResult("This car can't be add");
-                }
+                return new ErrorResult("You can't add");                
             }
-            else
-            {
-                return new ErrorResult("This car can't be add");
-            }
+            _carDal.Add(entity);
+            return new SuccessResult("Succesfully Added!");
         }
 
         public IResult Update(Car entity)

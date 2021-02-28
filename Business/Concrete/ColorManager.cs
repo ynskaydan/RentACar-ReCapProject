@@ -18,38 +18,16 @@ namespace Business.Concrete
         {
             _colorDal = colorDal;
         }
-     
-
-       
-
-
-
         public IResult Add(Color entity)
-        {
-            if (_colorDal.Get(c => c.ColorId == entity.ColorId) == null)
-            {
-                if (_colorDal.Get(c => c.ColorName == entity.ColorName) == null)
-                {
-                    _colorDal.Add(entity);
-                    return new SuccessResult("Color is successfully added");
-
-                }
-                else
-                {
-                    return new ErrorResult("You cannot add this Color. Please write a different ColorName");
-                }
-            }
-            else
-            {
-                return new ErrorResult("You cannot add this Color. Please write a different ColorID");
-            }
+        {              
+            _colorDal.Add(entity);
+            return new SuccessResult("Color is successfully added");                                                                
         }
 
         public IResult Delete(Color entity)
         {
             _colorDal.Delete(entity);
             return new SuccessResult("Color is completely removed");
-
         }
 
         public IDataResult<List<Color>> GetAll()
