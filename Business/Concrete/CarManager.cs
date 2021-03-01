@@ -37,7 +37,6 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll().Where(c => c.ColorId == colorid).ToList(),"Cars listed by color id "+colorid);
         }
-
         public IDataResult<List<Car>> GetAll()
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), "All Cars Listed");

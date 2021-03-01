@@ -22,14 +22,15 @@ namespace Business.Concrete
         [ValidationAspect(typeof(RentalValidator),Priority=1)]
         public IResult Add(Rental entity)
         {
-            if (_rentalDal.Get(r=> r.RentalId == entity.RentalId) != null)
-            {
                 if (GetCarAvaible(entity).Success == false )
                 {
                     return new ErrorResult(GetCarAvaible(entity).Message); 
                 }
-                
-            }
+                if(GetCustomerAvaible(entity).Success == false)
+                {
+                return new ErrorResult(GetCustomerAvaible(entity).Message);
+                }
+          
             _rentalDal.Add(entity);
             return new SuccessResult("Rent process started.");
 
@@ -72,6 +73,23 @@ namespace Business.Concrete
             }
             return new SuccessResult("You can rent this car");
 
+        }
+
+        public IResult GetCustomerAvaible(Rental rental)
+        {
+            var recus = _rentalDal.GetAll(r => r.CustomerId == rental.CustomerId);
+            if (recus.Count > 0)
+            {
+                foreach (var rc in recus)
+                {
+                    if (rc.ReturnDate == null)
+                    {
+                        return new ErrorResult("You can't rent any car without return car that you rented");
+                    }
+                    
+                }
+            }
+            return new SuccessResult("Rent process started");
         }
 
         public IResult Update(Rental entity)
