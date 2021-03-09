@@ -1,6 +1,8 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac;
+using Core.Utilities.Business;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -45,29 +47,43 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarValidator), Priority =1 )]
         public IResult Add(Car entity)
         {
-            if (_carDal.Get(c => c.CarId == entity.CarId) == null)
+            var result = BusinessRules.Run(CheckCarBrandLimit(entity.BrandId));
+            if (!result.Success)
             {
-                return new ErrorResult("You can't add");                
+                return result;
             }
+
+           
             _carDal.Add(entity);
-            return new SuccessResult("Succesfully Added!");
+            return new SuccessResult(Messages.Added);
         }
 
         public IResult Update(Car entity)
         {
             _carDal.Update(entity);
-            return new SuccessResult("Car Updated!");
+            return new SuccessResult(Messages.Updated);
         }
 
         public IResult Delete(Car entity)
         {
             _carDal.Delete(entity);
-            return new SuccessResult("Car deleted!");
+            return new SuccessResult(Messages.Removed);
         }
 
         public IDataResult<Car> GetById(int id)
         {
             return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == id), "Car got");
+        }
+
+        private IResult CheckCarBrandLimit(int brandId)
+        {
+            var result = _carDal.GetAll(c => c.BrandId == brandId);
+            if (result.Count > 10)
+            {
+                return new ErrorResult(Messages.BrandLimit);
+            }
+            return new SuccessResult();
+
         }
     }
 }

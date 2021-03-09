@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac;
 using Core.Utilities.Results.Abstract;
@@ -24,13 +25,13 @@ namespace Business.Concrete
         public IResult Add(Color entity)
         {              
             _colorDal.Add(entity);
-            return new SuccessResult("Color is successfully added");                                                                
+            return new SuccessResult(Messages.Added);                                                                
         }
 
         public IResult Delete(Color entity)
         {
             _colorDal.Delete(entity);
-            return new SuccessResult("Color is completely removed");
+            return new SuccessResult(Messages.Removed);
         }
 
         public IDataResult<List<Color>> GetAll()
@@ -46,7 +47,7 @@ namespace Business.Concrete
         public IResult Update(Color entity)
         {
             _colorDal.Update(entity);
-            return new SuccessResult("This color is updated");
+            return new SuccessResult(Messages.Updated);
         }
     }
 }
