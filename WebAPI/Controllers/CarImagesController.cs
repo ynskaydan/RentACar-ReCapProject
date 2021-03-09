@@ -10,11 +10,11 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class APIsController<T> : ControllerBase
+    public class CarImagesController<T> : ControllerBase
     {
         IEntityService<T> _entityService;
 
-        public APIsController(IEntityService<T> entityService)
+        public CarImagesController(IEntityService<T> entityService)
         {
             _entityService = entityService;
         }
