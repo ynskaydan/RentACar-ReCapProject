@@ -24,11 +24,11 @@ namespace Business.Concrete
       
         public IResult Add(CarImage carImage, IFormFile formFile)
         {
-            var result = BusinessRules.Run(CheckImageLimit(carImage.CarId)).Success;
-            if (!result)
-            {
-                return new ErrorResult(CheckImageLimit(carImage.CarId).Message);
-            }
+            //var result = BusinessRules.Run(CheckImageLimit(carImage.CarId)).Success;
+            //if (!result)
+            //{
+            //    return new ErrorResult(CheckImageLimit(carImage.CarId).Message);
+            //}
             carImage.ImagePath = FileHelper.Add(formFile);
             carImage.Date = DateTime.Now;
             _carImageDal.Add(carImage);

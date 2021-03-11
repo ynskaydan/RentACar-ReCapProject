@@ -11,13 +11,8 @@ namespace Business.ValidationRules.FluentValidation
         public CarImageValidator()
         {
             RuleFor(c => c.CarId).NotEmpty();
-            RuleFor(c => c.Date).Must(BeNow);
         }
 
-        private bool BeNow(DateTime arg)
-        {
-
-            
-        }
+        
     }
 }
