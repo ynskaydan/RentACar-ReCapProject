@@ -6,7 +6,7 @@ import { RentalResponseModel } from '../modules/rentalResponseModel';
   providedIn: 'root'
 })
 export class RentalService {
-apiUrl = "https://localhost:44309/api/rentals/getall"
+apiUrl = "https://localhost:44348/api/rentals/getall"
   constructor(private HttpClient:HttpClient) { }
   getRentals(){
     return this.HttpClient.get<RentalResponseModel>(this.apiUrl)

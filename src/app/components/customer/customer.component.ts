@@ -15,9 +15,13 @@ customers : Customer[] = [];
     this.getCustomers();
   }
   getCustomers(){
+    console.log("API Request started")
     this.customerService.getCustomers().subscribe(response=>{
       this.customers
+      console.log("API Request Finished")
     })
+    console.log("Method Finished")
+    
   }
 
 }

@@ -24,8 +24,11 @@ export class CarComponent implements OnInit {
     this.getCars();
   }
 getCars(){
+  console.log("API Request started")
   this.carService.getCars().subscribe(response => {
-    this.cars = response.data
+    this.cars = response.data;
+    console.log("API Request finished");
   });
+  console.log("Method finished")
 }
 }

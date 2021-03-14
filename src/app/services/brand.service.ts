@@ -7,7 +7,7 @@ import { BrandResponseModel } from '../modules/brandResponseModel';
   providedIn: 'root'
 })
 export class BrandService {
-apiUrl = 'https://localhost:44309/api/brands/getalldto';
+apiUrl = 'https://localhost:44348/api/brands/getall';
   constructor(private HttpClient:HttpClient) { }
 
   getBrands():Observable<BrandResponseModel> {

@@ -7,7 +7,7 @@ import { CustomerResponseModel } from '../modules/customerResponseModel';
 })
 export class CustomerService {
 
-  apiUrl ="https://localhost:44309/api/customers/getall";
+  apiUrl ="https://localhost:44348/api/customers/getalldto";
   constructor(private HttpClient:HttpClient) { }
 
   getCustomers(){

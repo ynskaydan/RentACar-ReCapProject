@@ -1,9 +1,13 @@
-<ul class="list-group">
-    <li class="list-group-item">BMW</li>
-    <li class="list-group-item">Mercedes</li>
-    <li class="list-group-item">FIAT</li>
-    <li class="list-group-item">RENAULT</li>
-    <li class="list-group-item">TESLA</li>
-    <li class="list-group-item">FORD</li>
-  </ul>
+<table class="table">
+  <thead>
+      <tr>
+          <th>Id</th>
+          <th>Brand</th>
+      </tr>
+  </thead>
+  <tr *ngFor="let brand of brands">
+    <td>{{ brand.brandId }}</td>
+    <td>{{ brand.brandName }}</td>
 
+  </tr>
+</table>
